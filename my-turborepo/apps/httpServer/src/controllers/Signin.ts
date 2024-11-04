@@ -2,7 +2,8 @@ import { SigninSchema } from "../types/index"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import client from "@repo/db/client"
-const secret="Saibaba9857"
+import { JWT_SECRET } from "../config"
+
 export const Signin=async(req:any,res:any)=>{
     const parsedData=SigninSchema.parse(req.body)
     if(!parsedData){
@@ -27,7 +28,7 @@ export const Signin=async(req:any,res:any)=>{
     return res.status(403).json({msg:"Invalid password"})
 
   }
-  const token=jwt.sign(parsedData.username,secret)
+  const token=jwt.sign({userId:user.id,role:user.role},JWT_SECRET)
   console.log(token)
   res.status(200).json({token})
 }
