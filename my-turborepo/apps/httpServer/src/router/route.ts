@@ -12,9 +12,9 @@ route.post("/signin",Signin);
 route.get("/elemets")
 route.get("/avatars")
 
-route.use("/userRouter",userRouter)
-route.use("/spaceRouter",spaceRouter)
-route.use("/adminRouter",adminRouter)
+route.use("/user",userRouter)
+route.use("/space",spaceRouter)
+route.use("/admin",adminRouter)
 
 route.get("/",(req,res)=>{
     res.send("helllloo just for test")
