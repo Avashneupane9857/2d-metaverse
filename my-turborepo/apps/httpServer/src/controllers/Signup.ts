@@ -5,8 +5,8 @@ export const Signup = async(req:any , res:any) => {
     const parsedData=SignupSchema.parse(req.body)
     console.log(parsedData)
     if(!parsedData){
-         res.status(400).json({msg:"Validation failed"})
-         return
+        return   res.status(400).json({msg:"Validation failed"})
+     
     }
     try{
     const hashedPassword= await bcrypt.hash(parsedData.password,10)
@@ -18,12 +18,12 @@ export const Signup = async(req:any , res:any) => {
             role:parsedData.type =="admin"? "Admin":"User",
         }
        })
-       res.json({
+     return  res.status(200).json({
         userId:user.id
        })
     }
     catch(e){
-        res.status(400).json({msg:"Duplication of data or any else error"})
+      return  res.status(400).json({msg:"Duplication of data or any else error"})
         console.log("this is the error"+e)
     }
   

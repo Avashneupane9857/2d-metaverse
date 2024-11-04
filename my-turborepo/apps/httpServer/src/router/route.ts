@@ -19,3 +19,5 @@ route.use("/adminRouter",adminRouter)
 route.get("/",(req,res)=>{
     res.send("helllloo just for test")
 })
+
+

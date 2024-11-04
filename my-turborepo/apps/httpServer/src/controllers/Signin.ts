@@ -6,8 +6,8 @@ const secret="Saibaba9857"
 export const Signin=async(req:any,res:any)=>{
     const parsedData=SigninSchema.parse(req.body)
     if(!parsedData){
-        res.status(403).json({msg:"Validation error"})
-        return
+      return  res.status(403).json({msg:"Validation error"})
+    
     }
  
  try{   const user=await client.user.findUnique({
@@ -20,12 +20,16 @@ export const Signin=async(req:any,res:any)=>{
 
   }
   const isvalid=await bcrypt.compare(parsedData.password,user.password)
+  if(isvalid){
+    console.log("passwordws matched")
+  }
   if(!isvalid){
     return res.status(403).json({msg:"Invalid password"})
 
   }
   const token=jwt.sign(parsedData.username,secret)
-  res.status(200).json({token:`${token}`})
+  console.log(token)
+  res.status(200).json({token})
 }
 catch(e){
     return res.status(403).json({msg:"user not found err in signin"})
