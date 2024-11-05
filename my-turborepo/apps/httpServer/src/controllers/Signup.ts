@@ -8,7 +8,7 @@ export const Signup = async(req:any , res:any) => {
         return   res.status(400).json({msg:"Validation failed"})
      
     }
-    try{
+    try { 
     const hashedPassword= await bcrypt.hash(parsedData.password,10)
     console.log(hashedPassword)
     const user= await client.user.create({
@@ -16,15 +16,16 @@ export const Signup = async(req:any , res:any) => {
             username:parsedData.username,
             password:hashedPassword,
             role:parsedData.type =="admin"? "Admin":"User",
-        }
+          }
        })
      return  res.status(200).json({
         userId:user.id
        })
     }
     catch(e){
+        console.log("this is the error"+ e)
       return  res.status(400).json({msg:"Duplication of data or any else error"})
-        console.log("this is the error"+e)
+       
     }
   
     }

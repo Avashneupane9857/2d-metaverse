@@ -40,7 +40,10 @@ export const UpdateElementSchema=z.object({
  
     imageUrl:z.string(), 
 })
-
+export const DeleteElementSchema=z.object({
+    id:z.string(),
+  
+})
 export const CreateAvatarSchema=z.object({
     name:z.string(),
     imageUrl:z.string(), 
