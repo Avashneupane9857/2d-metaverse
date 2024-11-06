@@ -8,7 +8,7 @@ userRouter.post("/metadata",user,async(req:Request,res:Response)=>{
     const parseData=UpdateMetaverseSchema.safeParse(req.body)
     if(!parseData.success){ res.status(403).json({msg:"Validation error brother"})}
    await client.user.update({
-        where:{id: req.body.userId},
+        where:{id: req.userId},
         data:{
             avatarId:parseData.data!.avatarId
         }
